@@ -44,7 +44,6 @@ docker run --rm -v $PWD:/work -w /work labelqa-kit \
     --report out/report.html
 '''
 ```
-## Directory Structure 
 labelqa-kit/
 ├── README.md
 ├── pyproject.toml
