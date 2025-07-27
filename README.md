@@ -42,7 +42,6 @@ docker run --rm -v $PWD:/work -w /work labelqa-kit \
     --schema examples/schema.json \
     --rules examples/rules.yml \
     --report out/report.html
-'''
 
 labelqa-kit/
   README.md  
