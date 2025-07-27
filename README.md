@@ -42,3 +42,42 @@ docker run --rm -v $PWD:/work -w /work labelqa-kit \
     --schema examples/schema.json \
     --rules examples/rules.yml \
     --report out/report.html
+'''
+```
+## Directory Structure 
+labelqa-kit/
+├── README.md
+├── pyproject.toml
+├── Dockerfile
+├── Makefile
+├── .pre-commit-config.yaml
+├── .gitignore
+├── LICENSE
+├── .github/
+│   └── workflows/
+│       └── ci.yml
+├── examples/
+│   ├── labels.csv
+│   ├── rules.yml
+│   └── schema.json
+├── src/
+│   └── labelqa/
+│       ├── __init__.py
+│       ├── cli.py
+│       ├── config.py
+│       ├── rules.py
+│       ├── reporting/
+│       │   ├── __init__.py
+│       │   ├── report.py
+│       │   └── templates/
+│       │       └── report.html.j2
+│       ├── utils/
+│       │   ├── __init__.py
+│       │   ├── io.py
+│       │   └── logging.py
+│       └── generators/
+│           ├── __init__.py
+│           └── synthetic_data.py
+└── tests/
+    ├── test_rules.py
+    └── test_cli.py
