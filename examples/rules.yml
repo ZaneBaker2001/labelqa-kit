@@ -1,0 +1,45 @@
+# Example rule set for a labeled text classification dataset
+global:
+  sample_violations: 5  # number of offending rows to render in report
+  severity_map:
+    regex: WARNING
+    numeric_range: ERROR
+    allowed_values: ERROR
+    null_fraction: WARNING
+    unique_fraction: WARNING
+    length_range: WARNING
+    duplicate_rows: ERROR
+
+rules:
+  - name: text_ascii_only
+    type: regex
+    column: text
+    pattern: "^[\x00-\x7F]+$"
+    flags: ""
+    fail_on_match: false  # fail when NOT matching
+
+  - name: sentiment_in_allowed_values
+    type: allowed_values
+    column: label
+    values: [positive, neutral, negative]
+
+  - name: text_length_reasonable
+    type: length_range
+    column: text
+    min_len: 5
+    max_len: 500
+
+  - name: id_unique
+    type: unique_fraction
+    column: id
+    min_fraction: 0.999
+
+  - name: no_duplicate_rows
+    type: duplicate_rows
+    subset: [text, label]
+    max_fraction: 0.01
+
+  - name: nulls_in_text_okayish
+    type: null_fraction
+    column: text
+    max_fraction: 0.02
