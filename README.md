@@ -44,6 +44,7 @@ docker run --rm -v $PWD:/work -w /work labelqa-kit \
     --report out/report.html
 '''
 ```
+bash 
 labelqa-kit/
   README.md  
   pyproject.toml  
