@@ -1,0 +1,8 @@
+{
+  "columns": {
+    "id": "int64",
+    "text": "string",
+    "label": "string"
+  },
+  "required": ["id", "text", "label"]
+}
