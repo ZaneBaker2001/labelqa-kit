@@ -1,0 +1,34 @@
+
+---
+
+## pyproject.toml
+
+```toml
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "labelqa"
+version = "0.1.0"
+description = "Lightweight dataset labeling QA toolkit"
+authors = [{ name = "Zane_Baker" }]
+readme = "README.md"
+requires-python = ">=3.9"
+license = { text = "none" }
+dependencies = [
+  "pandas>=2.2",
+  "numpy>=1.26",
+  "pydantic>=2",
+  "PyYAML>=6",
+  "typer>=0.12",
+  "rich>=13",
+  "jinja2>=3",
+  "pytest>=8",
+]
+
+[project.scripts]
+labelqa = "labelqa.cli:app"
+
+[tool.setuptools.packages.find]
+where = ["src"]
