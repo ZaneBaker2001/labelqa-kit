@@ -49,8 +49,7 @@ labelqa-kit/
   Dockerfile  
   Makefile  
   .pre-commit-config.yaml  
-  .gitignore  
-  LICENSE  
+  .gitignore    
   .github/
     workflows/
       ci.yml
