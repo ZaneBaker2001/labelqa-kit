@@ -43,8 +43,7 @@ docker run --rm -v $PWD:/work -w /work labelqa-kit \
     --rules examples/rules.yml \
     --report out/report.html
 '''
-```
-bash 
+``` bash 
 labelqa-kit/
   README.md  
   pyproject.toml  
