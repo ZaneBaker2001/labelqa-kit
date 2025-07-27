@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>labelqa Report</title>
+  <style>
+    body { font-family: system-ui, sans-serif; margin: 2rem; }
+    h1, h2, h3 { margin-top: 1.5rem; }
+    table { border-collapse: collapse; width: 100%; margin-top: 1rem; }
+    th, td { border: 1px solid #ddd; padding: 8px; }
+    th { background: #f5f5f5; text-align: left; }
+    .pass { color: #0a0; font-weight: bold; }
+    .fail { color: #a00; font-weight: bold; }
+    .severity-ERROR { color: #a00; font-weight: bold; }
+    .severity-WARNING { color: #d2691e; font-weight: bold; }
+    .severity-INFO { color: #333; }
+    .section { margin-bottom: 2rem; }
+    code { background: #f5f5f5; padding: 2px 4px; border-radius: 4px; }
+  </style>
+</head>
+<body>
+  <h1>labelqa Validation Report</h1>
+  <p><strong>Rows:</strong> {{ data.n_rows }}</p>
+
+  <div class="section">
+    <h2>Schema Validation</h2>
+    <p>Status: <span class="{{ data.schema.status }}">{{ data.schema.status }}</span></p>
+    {% if schema_errors and schema_errors | length > 0 %}
+    <table>
+      <thead>
+        <tr><th>Type</th><th>Column</th><th>Expected</th><th>Actual</th></tr>
+      </thead>
+      <tbody>
+        {% for e in schema_errors %}
+        <tr>
+          <td>{{ e.type }}</td>
+          <td>{{ e.column }}</td>
+          <td>{{ e.expected or '' }}</td>
+          <td>{{ e.actual or '' }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    {% endif %}
+  </div>
+
+  <div class="section">
+    <h2>Rule Results</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Severity</th>
+          <th>Status</th>
+          <th># Violations</th>
+          <th>% Violations</th>
+          <th>Details</th>
+        </tr>
+      </thead>
+      <tbody>
+      {% for r in data.rules %}
+        <tr>
+          <td>{{ r.name }}</td>
+          <td>{{ r.type }}</td>
+          <td class="severity-{{ r.severity }}">{{ r.severity }}</td>
+          <td class="{{ r.status }}">{{ r.status }}</td>
+          <td>{{ r.n_violations }}</td>
+          <td>{{ '%.2f' | format(r.fraction_violations * 100) }}%</td>
+          <td><code>{{ r.details | tojson }}</code></td>
+        </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</body>
+</html>
